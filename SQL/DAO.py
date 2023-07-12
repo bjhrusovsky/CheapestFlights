@@ -1,6 +1,6 @@
 import my_connector as mc
 
-class DOA:
+class DAO:
     __getAllWebsites = "SELECT * FROM WEBSITES;"
     def __init__(self):
         self.cursor = mc.mycursor
