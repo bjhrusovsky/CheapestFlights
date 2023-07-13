@@ -1,5 +1,6 @@
-#import SQL.DAO
-import Bots.KayakBot as KayakBot
+import sys
+sys.path.append("/SQL/DAO")
+#import Bots.KayakBot as KayakBot
 
 
 class Service:
@@ -8,8 +9,3 @@ class Service:
         if not cls.__instance:
             cls.__instance = super().__new__(cls, *args, **kwargs)
         return cls.__instance
-
-test1 = Service()
-test2 = Service()
-
-print(test1 is test2)
