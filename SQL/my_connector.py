@@ -1,10 +1,7 @@
 import mysql.connector
-from jproperties import Properties
+from Utils.OpenJProperties import openFile
 
-configs = Properties()
-#Grab our DB information securely.
-with open('app-config.properties', 'rb') as config_file:
-    configs.load(config_file)
+configs = openFile("app-config.properties")
 
 
 

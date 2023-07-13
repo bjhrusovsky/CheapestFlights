@@ -15,9 +15,3 @@ class DAO:
         for data in myWebsites:
             links.append(data[0])
         return links
-
-
-
-
-
-
