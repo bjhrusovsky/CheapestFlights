@@ -1,7 +1,7 @@
 from datetime import datetime, time
 from Utils.OpenJProperties import openFile
 
-configs = openFile("src/rules-config.properties")
+configs = openFile("../src/rules-config.properties")
 
 def isUnderPriceLimit(price: int) -> bool:
     return price <= int(configs.get("priceLimit").data)

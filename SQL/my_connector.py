@@ -1,7 +1,7 @@
 import mysql.connector
 from Utils.OpenJProperties import openFile
 
-configs = openFile("app-config.properties")
+configs = openFile("../SQL/app-config.properties")
 
 
 
@@ -16,12 +16,3 @@ mydb = mysql.connector.connect(
 
 #This cursor allows us to run queries.
 mycursor = mydb.cursor()
-
-
-#MAKE SURE WE DELETE AT THE END ******************************************************
-# mycursor.execute('SELECT * FROM Websites;')
-#
-# users = mycursor.fetchall()
-#
-# for user in users:
-#     print(user)

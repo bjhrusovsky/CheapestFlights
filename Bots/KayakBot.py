@@ -24,13 +24,13 @@ flightCards = driver.find_elements(by="xpath", value=".//div[@class='nrc6']")
 flightsGathered = []
 for flight in flightCards:
     tempDict = {
-        "price" : flight.find_element(by="xpath", value=".//div[@class='f8F1-price-text']").text,
+        "price" : int(flight.find_element(by="xpath", value=".//div[@class='f8F1-price-text']").text[1:]),
         "goingDepartureTimeOfFlight" : flight.find_elements(by="xpath", value=".//div[@class='vmXl vmXl-mod-variant-large']")[0],
         "returnDepartureTimeOfFLight": flight.find_elements(by="xpath", value=".//div[@class='vmXl vmXl-mod-variant-large']")[1],
         "isNonStopGoing" : flight.find_elements(by="xpath", value=".//span[@class='JWEO-stops-text']")[0].text,
         "isNonStopReturn" : flight.find_elements(by="xpath", value=".//span[@class='JWEO-stops-text']")[1].text
     }
-    if not flightRules.isUnderPriceLimit(tempDict["price"]):
+    if not flightRules.isUnderPriceLimit((tempDict["price"])):
         break
     if flightRules.passesAllFlightPreferences(tempDict["price"],
                                               tempDict["isNonStopGoing"],
