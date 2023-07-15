@@ -1,5 +1,5 @@
 import time
-
+import models.flight as Flight
 from Utils.selenium_config import getDriver
 import src.FlightRules as flightRules
 from selenium.webdriver.common.by import By
@@ -26,19 +26,25 @@ def runKayakBot(link: str):
     flightsGathered = []
     for flight in flightCards:
         try:
-            tempDict = {
-                "price" : int((flight.find_element(by="xpath", value=".//div[@class='f8F1-price-text']").text[1:]).replace(',', '')),
-                "goingDepartureTimeOfFlight" : flight.find_elements(by="xpath", value=".//div[@class='vmXl vmXl-mod-variant-large']")[0].text,
-                "returnDepartureTimeOfFLight": flight.find_elements(by="xpath", value=".//div[@class='vmXl vmXl-mod-variant-large']")[1].text,
-                "isNonStopGoing" : flight.find_elements(by="xpath", value=".//span[@class='JWEO-stops-text']")[0].text,
-                "isNonStopReturn" : flight.find_elements(by="xpath", value=".//span[@class='JWEO-stops-text']")[1].text
-            }
+            currentFlight = Flight.Flight()
+            currentFlight.price = (int((flight.find_element(by="xpath", value=".//div[@class='f8F1-price-text']").text[1:]).replace(',', '')))
+            currentFlight.flightGoingTime = flight.find_elements(by="xpath", value=".//div[@class='vmXl vmXl-mod-variant-large']")[0].text
+            currentFlight.flightReturnTime = flight.find_elements(by="xpath", value=".//div[@class='vmXl vmXl-mod-variant-large']")[1].text
+            currentFlight.numOfStopsGoing = flight.find_elements(by="xpath", value=".//span[@class='JWEO-stops-text']")[0].text
+            currentFlight.numOfStopsReturning = flight.find_elements(by="xpath", value=".//span[@class='JWEO-stops-text']")[1].text
+            currentFlight.link = flight.find_element(by="xpath", value=".//a[@role='link']").get_attribute('href')
+            currentFlight.flightDurationGoing = flight.find_elements(by="xpath", value=".//div[@class='vmXl vmXl-mod-variant-default']")[1].text
+            currentFlight.flightDurationReturning = flight.find_elements(by="xpath", value=".//div[@class='vmXl vmXl-mod-variant-default']")[3].text
+            currentFlight.airportNameGoing = flight.find_elements(by="xpath", value=".//span[@class='EFvI-ap-info']")[0].text \
+                                             + "-" + flight.find_elements(by="xpath", value=".//span[@class='EFvI-ap-info']")[1].text
+            currentFlight.airportNameReturning = flight.find_elements(by="xpath", value=".//span[@class='EFvI-ap-info']")[2].text\
+                                                 + "-" + flight.find_elements(by="xpath", value=".//span[@class='EFvI-ap-info']")[3].text
         except Exception as e:
             continue
-        if not flightRules.isUnderPriceLimit((tempDict["price"])):
+        if not flightRules.isUnderPriceLimit(currentFlight.price):
             break
-        if flightRules.passesFlightPreferencesForGoingFlight(tempDict["price"],
-                                                  tempDict["isNonStopGoing"],
-                                              tempDict["goingDepartureTimeOfFlight"]): flightsGathered.append(tempDict)
+        if flightRules.passesFlightPreferencesForGoingFlight(currentFlight.price,
+                                                  currentFlight.numOfStopsGoing,
+                                              currentFlight.flightGoingTime): flightsGathered.append(currentFlight)
     time.sleep(5)
     return flightsGathered

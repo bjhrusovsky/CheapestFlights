@@ -1,6 +1,7 @@
 import sys
-sys.path.append("/SQL/DAO")
 from SQL.DAO import DAO
+sys.path.append("/SQL/DAO")
+
 
 class Service:
     __instance = None
@@ -15,7 +16,12 @@ class Service:
 
     def getAllWebsites(self) -> list[str]:
         return self.DAO.getAllWebsiteLinks()
+
     def getAllAirportFlightPaths(self):
         return self.DAO.getAllAirports()
+
     def getAllTravelIntervals(self):
         return self.DAO.getAllTravelIntervals()
+
+    def storeValidFlight(self, flightInfo):
+        return self.DAO.storeValidFlight(flightInfo)

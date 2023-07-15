@@ -7,7 +7,13 @@ def isUnderPriceLimit(price: int) -> bool:
     return price <= int(configs.get("priceLimit").data)
 
 def isNonStopFlight(flightStops: str) -> bool:
-    return flightStops.lower() == configs.get("numOfStops").data
+    numOfFlightStops = {
+        "nonstop": 0,
+        "1 stop": 1,
+        "2 stops": 2,
+        "3 stops": 3
+    }
+    return numOfFlightStops[flightStops.lower()] <= int(configs.get("numOfStops").data)
 
 def isWithinTimeRange(timeOfFlight: str) -> bool:
     if timeOfFlight[-2] in '-+':
@@ -29,9 +35,6 @@ def passesAllFlightPreferences(price: int, goingFlightStops: str, returnFlightSt
 
 def passesFlightPreferencesForGoingFlight(price: int, goingFlightStops: str,
                             goingTimeOfFlight: str) -> bool:
-    rule1 = isUnderPriceLimit(price)
-    rule2 = isNonStopFlight(goingFlightStops)
-    rule4 = isWithinTimeRange(goingTimeOfFlight)
     return isUnderPriceLimit(price) and\
            isNonStopFlight(goingFlightStops) and\
            isWithinTimeRange(goingTimeOfFlight)

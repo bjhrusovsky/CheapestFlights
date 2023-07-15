@@ -13,6 +13,3 @@ mydb = mysql.connector.connect(
     port=configs.get("port").data,
     database=configs.get("database").data
 )
-
-#This cursor allows us to run queries.
-mycursor = mydb.cursor()
