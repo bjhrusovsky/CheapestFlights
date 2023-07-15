@@ -1,8 +1,8 @@
 
 def buildWebsiteLink(flightPath: str, DepartureDate: str, ReturnDate: str, link: str) -> str:
-    link.replace("LOCATION", flightPath)
-    link.replace("DATETO", DepartureDate)
-    link.replace("DATEFROM", ReturnDate)
+    link = link.replace("LOCATION", flightPath)
+    link = link.replace("DATETO", DepartureDate)
+    link = link.replace("DATEFROM", ReturnDate)
     return link
 
 

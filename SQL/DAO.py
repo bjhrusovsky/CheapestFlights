@@ -27,7 +27,7 @@ class DAO:
         AirportsFrom = self.executeReadQuery(self.__GetAllAirportsFrom)
         AllAirports = []
         for airport in AirportsFrom:
-            flightFrom = airport[0] + " - "
+            flightFrom = airport[0] + "-"
             for fromPort in AirportsTo:
                 flightDirection = flightFrom + fromPort[0]
                 AllAirports.append(flightDirection)
