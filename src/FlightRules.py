@@ -1,4 +1,4 @@
-from datetime import datetime, time
+from datetime import datetime
 from Utils.OpenJProperties import openFile
 
 configs = openFile("../src/rules-config.properties")
