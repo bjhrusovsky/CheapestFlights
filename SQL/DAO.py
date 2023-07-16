@@ -3,6 +3,8 @@ import models.flight as Flight
 from SQL.my_connector import mydb
 sys.path.append("/SQL/my_connector.py")
 
+#This class handles the meat of all SQL querying.
+#anything that happens within this class WILL effect your database.
 class DAO:
     __getAllWebsites = "SELECT * FROM WEBSITES;"
     __getAllTravelIntervals = "SELECT * FROM SEARCHINTERVALS;"

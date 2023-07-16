@@ -2,7 +2,8 @@ import sys
 from SQL.DAO import DAO
 sys.path.append("/SQL/DAO")
 
-
+#This class has a deep connection with the DAO file. To assist with security
+# and structure this class enables us to limit capabilities and access to our DAO object.
 class Service:
     __instance = None
 
