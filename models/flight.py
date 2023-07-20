@@ -10,7 +10,8 @@ class Flight:
         self._link = None
         self._numOfStopsGoing = None
         self._numOfStopsReturning = None
-
+        self._flightGoingDate = None
+        self._flightReturnDate = None
     @property
     def airportNameGoing(self):
         return self._airportNameGoing
@@ -18,6 +19,22 @@ class Flight:
     @airportNameGoing.setter
     def airportNameGoing(self, airportNameGoing):
         self._airportNameGoing = airportNameGoing
+
+    @property
+    def flightGoingDate(self):
+        return self._flightGoingDate
+
+    @flightGoingDate.setter
+    def flightGoingDate(self, flightGoingDate):
+        self._flightGoingDate = flightGoingDate
+
+    @property
+    def flightReturnDate(self):
+        return self._flightReturnDate
+
+    @flightReturnDate.setter
+    def flightReturnDate(self, flightReturnDate):
+        self._flightReturnDate = flightReturnDate
 
     @property
     def airportNameReturning(self):

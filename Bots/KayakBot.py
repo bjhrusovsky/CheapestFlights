@@ -10,7 +10,7 @@ from selenium.webdriver.support import expected_conditions as EC
 # location = "LAX - TYO"
 # DepartDate = '2024-01-22'
 # ReturnDate = '2024-01-26'
-def runKayakBot(link: str):
+def runKayakBot(link: str, DepartureDate: str, ReturnDate: str):
     driver = getDriver()
     driver.get(link)
 
@@ -39,6 +39,8 @@ def runKayakBot(link: str):
                                              + "-" + flight.find_elements(by="xpath", value=".//span[@class='EFvI-ap-info']")[1].text
             currentFlight.airportNameReturning = flight.find_elements(by="xpath", value=".//span[@class='EFvI-ap-info']")[2].text\
                                                  + "-" + flight.find_elements(by="xpath", value=".//span[@class='EFvI-ap-info']")[3].text
+            currentFlight.flightReturnDate = ReturnDate
+            currentFlight.flightGoingDate = DepartureDate
         except Exception as e:
             continue
         if not flightRules.isUnderPriceLimit(currentFlight.price):

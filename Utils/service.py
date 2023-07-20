@@ -26,3 +26,6 @@ class Service:
 
     def storeValidFlight(self, flightInfo):
         return self.DAO.storeValidFlight(flightInfo)
+
+    def clearOldFlightData(self):
+        return self.DAO.clearOldFlightData()

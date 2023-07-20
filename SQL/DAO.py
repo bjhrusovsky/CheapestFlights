@@ -11,8 +11,10 @@ class DAO:
     __GetAllAirportsTo = "SELECT * FROM AirportsTo;"
     __GetAllAirportsFrom = "SELECT * FROM AirportsFrom;"
     __InsertFlightInfo = 'INSERT INTO FlIGHTS (airportNameGoing, airportNameReturning, price, flightGoingTime, flightReturnTime,' \
-                         ' flightDurationGoing, flightDurationReturning, link, numberOfStopsGoing, numberOfStopsReturning)' \
-                         ' VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'
+                         ' flightDurationGoing, flightDurationReturning, link, numberOfStopsGoing, numberOfStopsReturning,' \
+                         ' flightGoingDate, flightReturnDate)' \
+                         ' VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'
+    __DelFlightData = 'DELETE FROM Flights;'
     def __init__(self):
         self.cursor = mydb.cursor()
         self.myDatabase = mydb
@@ -45,6 +47,7 @@ class DAO:
         return AllAirports
 
     def storeValidFlight(self, flightInfo: Flight.Flight):
+
         airportNameGoing = flightInfo.airportNameGoing
         airportNameReturning = flightInfo.airportNameReturning
         price = flightInfo.price
@@ -55,8 +58,15 @@ class DAO:
         link = flightInfo.link
         numberOfStopsGoing = flightInfo.numOfStopsGoing
         numberOfStopsReturning = flightInfo.numOfStopsReturning
+        flightGoingDate = flightInfo.flightGoingDate
+        flightReturnDate = flightInfo.flightReturnDate
         insertQuery = (airportNameGoing, airportNameReturning, price, flightGoingTime,
                                                 flightReturnTime,flightDurationGoing, flightDurationReturning,
-                                                link, numberOfStopsGoing, numberOfStopsReturning)
+                                                link, numberOfStopsGoing, numberOfStopsReturning, flightGoingDate, flightReturnDate)
         self.insertQuery(self.__InsertFlightInfo, insertQuery)
+
+    def clearOldFlightData(self):
+        return self.executeQuery(self.__DelFlightData)
+
+
 
