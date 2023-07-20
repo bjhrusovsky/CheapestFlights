@@ -15,6 +15,8 @@ class DAO:
                          ' flightGoingDate, flightReturnDate)' \
                          ' VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)'
     __DelFlightData = 'DELETE FROM Flights;'
+    __getAllFlights = 'SELECT * FROM Flights;'
+
     def __init__(self):
         self.cursor = mydb.cursor()
         self.myDatabase = mydb
@@ -67,6 +69,9 @@ class DAO:
 
     def clearOldFlightData(self):
         return self.executeQuery(self.__DelFlightData)
+
+    def getAllFlights(self):
+        return self.executeQuery(self.__getAllFlights)
 
 
 

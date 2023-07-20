@@ -41,9 +41,10 @@ def main():
 
     try:
         service = build('sheets', 'v4', credentials=creds)
-
         # Call the Sheets API
         sheet = service.spreadsheets()
+
+
         result = sheet.values().update(spreadsheetId=SAMPLE_SPREADSHEET_ID,
                                     range=SAMPLE_RANGE_NAME, valueInputOption="USER_ENTERED", body={"values": [["BIG MOM"]]}).execute()
         # values = result.get('values', [])
