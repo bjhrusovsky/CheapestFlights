@@ -2,6 +2,7 @@ from __future__ import print_function
 
 import os.path
 
+from Utils.service import Service
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -17,7 +18,7 @@ SAMPLE_SPREADSHEET_ID = '1X5jnb-A97bQxlZYVP_79ViK6VrdprD9ov7x5NobHWJU'
 SAMPLE_RANGE_NAME = 'Sheet1!A1'
 
 
-def main():
+def writeToGoogleSheets():
     """Shows basic usage of the Sheets API.
     Prints values from a sample spreadsheet.
     """
@@ -44,22 +45,17 @@ def main():
         # Call the Sheets API
         sheet = service.spreadsheets()
 
+        myService = Service()
+        listOfFlights = myService.getAllFlights()
+        lengthOfList = len(listOfFlights) + 1
+        range = f'FlightData!A2:L{lengthOfList}'
 
-        result = sheet.values().update(spreadsheetId=SAMPLE_SPREADSHEET_ID,
-                                    range=SAMPLE_RANGE_NAME, valueInputOption="USER_ENTERED", body={"values": [["BIG MOM"]]}).execute()
-        # values = result.get('values', [])
+        results = sheet.values().update(spreadsheetId=SAMPLE_SPREADSHEET_ID,
+                                                 range=range,
+                                                 valueInputOption="USER_ENTERED",
+                                                 body={
+                                                     "values": listOfFlights
+                                                 }).execute()
 
-        # if not values:
-        #     print('No data found.')
-        #     return
-        #
-        # print('Name, Major:')
-        # for row in values:
-        #     # Print columns A and E, which correspond to indices 0 and 4.
-        #     print('%s, %s' % (row[0], row[4]))
     except HttpError as err:
         print(err)
-
-
-if __name__ == '__main__':
-    main()

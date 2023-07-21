@@ -29,3 +29,6 @@ class Service:
 
     def clearOldFlightData(self):
         return self.DAO.clearOldFlightData()
+
+    def getAllFlights(self):
+        return self.DAO.getAllFlights()
