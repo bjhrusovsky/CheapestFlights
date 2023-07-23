@@ -7,6 +7,7 @@ import google.auth
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
+#enable our google sign in and email capabilities
 
 def gmail_create_draft():
     """Create and insert a draft email.
