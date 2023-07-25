@@ -2,3 +2,7 @@ app-config.properties
 API/credentials.json
 token.json
 api-config.properties
+passwordEncryption.py
+encrypted.password
+privateKey.pem
+publicKey.pem
