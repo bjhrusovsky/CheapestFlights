@@ -14,10 +14,10 @@ def runKayakBot(link: str, DepartureDate: str, ReturnDate: str):
     driver = getDriver()
     driver.get(link)
 
-    #   Set the delay that we will wait for
-    #   after we want to grab the list of flights 'nrc6' then find the information from each flight available.
+    #   Set the delay that we will wait for. In this case the progress bar. 
     delay = 10
-    WebDriverWait(driver, delay).until(EC.presence_of_element_located((By.CLASS_NAME, 'nrc6')))
+    WebDriverWait(driver, delay).until(EC.text_to_be_present_in_element((By.ID, "hiddenAlertContainer"), 'Results ready'))
+
     flightCards = driver.find_elements(by="xpath", value=".//div[@class='nrc6']")
 
     #   Here we iterate through each of our flight options.
