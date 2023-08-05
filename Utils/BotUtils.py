@@ -54,6 +54,11 @@ def getValidFlights():
     return listOfValidFlights
 
 def storeValidFLights(ListOfValidFlights: list):
+    """
+    Store our valid flights into the repo. This is our middle man.
+    :param ListOfValidFlights:
+    :return:
+    """
     myService = Service()
     myService.clearOldFlightData()
     for flightList in ListOfValidFlights:
