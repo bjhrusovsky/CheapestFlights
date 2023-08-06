@@ -5,6 +5,14 @@ from itertools import product
 import Bots.KayakBot as KayakBot
 
 def buildWebsiteLink(flightPath: str, DepartureDate: str, ReturnDate: str, link: str) -> str:
+    """
+    here we gather our website link in order to connect and grab our flight data.
+    :param flightPath:
+    :param DepartureDate:
+    :param ReturnDate:
+    :param link:
+    :return:
+    """
     link = link.replace("LOCATION", flightPath)
     link = link.replace("DATETO", DepartureDate)
     link = link.replace("DATEFROM", ReturnDate)
